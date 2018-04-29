@@ -44,7 +44,7 @@ $ cd crudBasic
 ## model 만들기
 
 레일즈엔 약속이 많습니다. 좋을 때도 안좋을 때도 있습니다.  
-`Model`을 만들 땐 단수로 만들어야 합니다.  
+`Model`을 만들 땐 단수로 만듭니다.
 예를 들어,  
 ```bash
 $ rails generate model Memo(단수)
@@ -84,7 +84,7 @@ $ rails g model Memo title:string content:text
 
 ## controller 만들기
 레일즈엔 약속이 많습니다. 좋을 때도 안좋을 때도 있습니다.  
-`Controller`를 만들 땐 복수로 만들어야 합니다.  
+`Controller`를 만들 땐 복수로 만듭니다.
 예를 들어,  
 
 ```bash
@@ -114,9 +114,9 @@ $ rails g controller Memos new edit index show
 [`오늘 뭐 먹지?`에서 배운 액션](https://github.com/knulikelion/foodForToday#%EC%95%A1%EC%85%98)  
 
 7가지 액션으로 `CRUD` 구조를 만듭니다.
-* 게시글을 만드는 `new`, `create` 액션 - `Create`     
-* 게시글을 읽는 `index`, `show` 액션 - `Read`   
-* 게시글을 수정하는 `edit`, `update` 액션 - `Update`  
-* 게시글을 삭제하는 `destroy` 액션 - `Delete`
+* `Create` - 게시글을 만드는 `new`, `create` 액션       
+* `Read`   - 게시글을 읽는 `index`, `show` 액션     
+* `Update` - 게시글을 수정하는 `edit`, `update` 액션  
+* `Delete` - 게시글을 삭제하는 `destroy` 액션  
 
 
