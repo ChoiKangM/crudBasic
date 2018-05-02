@@ -118,6 +118,22 @@ $ rails g controller Memos new edit index show
 #### 액션
 지난 시간에 배운 액션을 복습하려면 아래 링크로 갑니다.  
 [`오늘 뭐 먹지?`에서 배운 액션](https://github.com/knulikelion/foodForToday#%EC%95%A1%EC%85%98)  
+액션은 컨트롤러와 뷰를 연결하고 우리가 원하는 코드를 가지고 있습니다.  
+컨트롤러(`이름s_controller`)는
+```ruby
+def 액션
+  내가 원하는 코드가 모두 이루어지는 곳
+  게시글을 만들고 보여주고 고치고 삭제합니다
+  "@인스턴스변수"를 이용해 뷰와 소통합니다
+  변수를 보내거나 가져옵니다
+end
+``` 
+뷰(`액션.html.erb`)는
+```html
+<h1>HTML과 CSS로 모든 걸 보여주마</h1>
+<h4><%= @인스턴스변수 %>는 컨트롤러의 해당 액션에서 불러옵니다 날아옵니다</h4>
+<h4><% %>와 <%= %>로 루비 문법을 사용합니다.</h4>
+```
 
 7가지 액션으로 `CRUD` 구조를 만듭니다.
 * `Create` - 게시글을 만드는 `new`, `create` 액션       
@@ -128,6 +144,7 @@ $ rails g controller Memos new edit index show
 ## `memos_controller.rb`에 `CRUD` 구조 만들 7가지 액션 만들기
 `$ rails g controller Memos new edit index show`로 컨트롤러를 만들고   
 컨트롤러 파일을 열어보면 아래의 상황입니다.  
+#### `memos_controller.rb`
 ```ruby
 class MemosController < ApplicationController
   def new
@@ -207,7 +224,8 @@ end
 
 ## `routes.rb`
 `$ rails g controller Memos new edit index show`로 컨트롤러를 만들면   
-`router`에 레일즈는 자동으로 필요한 구문을 추가합니다  
+`router`에 레일즈는 자동으로 필요한 구문을 추가합니다 
+#### `routes.rb` 
 ```ruby
 Rails.application.routes.draw do
   get 'memos/new'
