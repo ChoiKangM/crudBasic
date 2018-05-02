@@ -1,5 +1,6 @@
 # Rails 게시판 만들기
-> 레일즈에서 CRUD 구조를 이용해 게시판을 만듭니다.    
+> 레일즈에서 CRUD 구조를 이용해 게시판을 만듭니다.  
+> 처음 만드니 무식하고 못생기게 만듭니다.    
 
 [루비온레일즈 개발 가이드](http://guides.rubyonrails.org/v5.0/getting_started.html)를 참조해 만들었습니다.  
  
