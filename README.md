@@ -201,7 +201,9 @@ end
 정리하면 `get` `post` `patch` `delete`를 이용해 효율적으로 통신한다.  
 `get`은 URL창에 정보를 보여주며 통신하고  
 `post`는 정보를 숨기며 통신한다.  
-여기까지만 알아두고 라우터를 열어봅니다.
+이번 세션에는 `REST`를 적용해 라우터를 사용하긴 힘드니  
+`get`과 `post`가 존재한다는 것만 알아둡시다.  
+.
 
 ## `routes.rb`
 `$ rails g controller Memos new edit index show`로 컨트롤러를 만들면   
@@ -475,7 +477,10 @@ end
 ## `edit.html.erb`
 ```erb
 <h1>수정하기</h1>
+<!-- 현재 edit 액션은 글을 직접 수정하는 곳이고 -->
+<!-- 글 내용은 update 액션으로 보내어 해당 Memo를 수정합니다. -->
 <form action="/memos/<%= @memo.id%>/update">
+  <!-- 글을 쓸 때 해킹을 예방할 토큰을 함께 보냅니다  -->
   <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
   제목 <br>
   <input type="text" name="title" value="<%= @memo.title%>">
@@ -483,8 +488,9 @@ end
   내용 <br>
   <textarea name="content" cols="30" rows="10"><%=@memo.content%></textarea>
   <br>
+  <!-- form 태그를 submit 타입으로 제출해야 글이 써집니다. -->
   <input type="submit" value="글쓰기">
-</form> 
+</form>
 ```
 
 ## `show.html.erb`
@@ -499,4 +505,5 @@ end
 <!-- 목록으로 돌아갑니다 -->
 <a href="/memos/index">목록으로</a>
 ```
-
+무식하게 `CRUD`를 만들어 봤습니다.  
+수고 많으셨습니다.
