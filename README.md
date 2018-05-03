@@ -85,6 +85,11 @@ $ rails g model Memo title:string content:text
 위의 경우 `Memo` 게시글 안에는 `title`과 `content`가 존재합니다.
 
 
+## `model`이 기반인 데이터베이스 만들기
+`model`이 기반인 데이터베이스를 만듭니다.  
+```bash
+$ rails db:migrate
+```
 
 ## controller 만들기
 레일즈엔 약속이 많습니다. 좋을 때도 안좋을 때도 있습니다.  
