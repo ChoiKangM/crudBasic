@@ -1,7 +1,6 @@
 class MemosController < ApplicationController
   # CREATE
   def new
-    # Memo 모델 중 새로운 객체를 생성해 @memo에 저장합니다
   end
   def create
     # Memo 모델 중 새로운 객체를 생성해 @memo에 저장합니다
