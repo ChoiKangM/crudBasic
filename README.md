@@ -193,7 +193,7 @@ class MemosController < ApplicationController
   end
 end
 ```
-`Create`와 `Read`를 만들기 전 여러 개념을 정리하자
+`Create`와 `Read`를 만들기 전 여러 개념을 정리합니다.
 
 #### 웹
 위키피디아 검색결과  
@@ -279,10 +279,15 @@ end
 `Create`와 `Read`에 필요한 코드를 추가합니다.
 ```ruby
 Rails.application.routes.draw do
-  get '/' => 'memos#index'
+  # 루트 페이지는 memos 컨트롤러의 index 액션이다.
+  # get '/' => 'memos#index'
   root 'memos#index'
+
   # Create
+
+  # 글쓰는 창('/memos/new')는 memos 컨트롤러의 new액션이다.
   get '/memos/new' => 'memos#new'
+  # 작성 완료 후('/memos/create')엔 memos 컨트롤러의 create액션으로 간다.
   get '/memos/create' => 'memos#create' 
   # get으로 넘기면 데이터가 보여 해킹 위험이 있습니다. 
   # 통신 방식을 post로 변경하고 url을 줄입니다.
@@ -290,9 +295,12 @@ Rails.application.routes.draw do
   # 하지만 우린 무식하게 진행합니다
 
   # Read
+
+  # 뉴스피드(전체 글) 보러 memos 컨트롤러의 index액션으로 간다.
   get '/memos/index' => 'memos#index' # 효율적이지 못합니다 하지만 우린 무식합니다
   # get '/memos' => 'memos#index'
   
+  # 원하는 글 하나 보러('/memos/:id/show') memos 컨트롤러의 show 액션으로 간다.
   get '/memos/:id/show' => 'memos#show' # 효율적이지 못합니다 무식하게 해보자
   # get '/memos/:id' => 'memos#show'
 ```
@@ -301,12 +309,12 @@ Rails.application.routes.draw do
 `root 'memos#index'`는 `# get '/' => 'memos#index'`와 같습니다.  
   
 #### `Create`
-`new` **새로운 메모를 쓰자**   
+`new` **새로운 메모를 쓰기**   
 `get '/memos/new' => 'memos#new'`는   
 `/memos/new` URL로 들어오면 `memos(컨트롤러)#new(액션)`로 보냅니다.    
 사용자가 새로운 글을 쓰는 액션(페이지) 입니다.  
 
-`create` **새로운 메모를 만들자**   
+`create` **쓴 메모를 모델로 보내기**   
 `get '/memos/create' => 'memos#create'`는  
 `/memos/create` URL로 들어오면 `memos(컨트롤러)#create(액션)`로 보냅니다.    
 쓴 글 내용을 받아 데이터로 저장하는 액션입니다. 
@@ -332,8 +340,6 @@ CRUD에서 CR을 먼저 만들어봅니다.
 class MemosController < ApplicationController
   # CREATE
   def new
-    # Memo 모델 중 새로운 객체를 생성해 @memo에 저장합니다
-    @memo = Memo.new
   end
 
   def create
@@ -438,6 +444,8 @@ class MemosController < ApplicationController
   def create
     # Memo 모델 중 새로운 객체를 생성해 @memo에 저장합니다
     @memo = Memo.new
+    # @memo.id는 레일즈가 자동으로 생성
+    # @memo.id = params[:id]
     # @memo의 title애 new.html.erb의 title 변수의 내용을 넣습니다
     @memo[:title] = params[:title]
     # @memo의 content애 new.html.erb의 content 변수의 내용을 넣습니다
@@ -450,6 +458,7 @@ class MemosController < ApplicationController
     redirect_to root_path
     # redirect_to '/' 와 동일합니다
     # 왜 그럴까요?
+    # 저장 후 localhost:3000'/' URL로 가기
   end
 
   # READ
@@ -498,10 +507,15 @@ end
 ## `routes.rb`
 ```ruby
 Rails.application.routes.draw do
+  # 루트 페이지는 memos 컨트롤러의 index 액션이다.
   # get '/' => 'memos#index'
   root 'memos#index'
+
   # Create
+
+  # 글쓰는 창('/memos/new')는 memos 컨트롤러의 new액션이다.
   get '/memos/new' => 'memos#new'
+  # 작성 완료 후('/memos/create')엔 memos 컨트롤러의 create액션으로 간다.
   get '/memos/create' => 'memos#create' 
   # get으로 넘기면 데이터가 보여 해킹 위험이 있습니다. 
   # 통신 방식을 post로 변경하고 url을 줄입니다.
@@ -509,22 +523,30 @@ Rails.application.routes.draw do
   # 하지만 우린 무식하게 진행합니다
 
   # Read
+
+  # 뉴스피드(전체 글) 보러 memos 컨트롤러의 index액션으로 간다.
   get '/memos/index' => 'memos#index' # 효율적이지 못합니다 하지만 우린 무식합니다
   # get '/memos' => 'memos#index'
   
+  # 원하는 글 하나 보러('/memos/:id/show') memos 컨트롤러의 show 액션으로 간다.
   get '/memos/:id/show' => 'memos#show' # 효율적이지 못합니다 무식하게 해보자
   # get '/memos/:id' => 'memos#show'
   
   # Update
+  
+  # 원하는 글('/memos/:id/edit') 수정하러 memos 컨트롤러의 edit 액션으로 간다. 
   get '/memos/:id/edit' => 'memos#edit'
+  # 수정한 글을 저장하러('/memos/:id/update') memos 컨트롤러의 update 액션으로 간다.
   get '/memos/:id/update' => 'memos#update' # 해킹 위험 + 효율적이지 못합니다
   # patch '/memos/:id' => 'memos#update'
 
   # Delete
+  # 원하는 글을 삭제하러('/memos/:id/destroy') memos 컨트롤러의 destroy 액션으로 간다.
   get '/memos/:id/destroy' => 'memos#destroy' # 오작동 위험 + 효율적이지 못합니다
   # delete '/memos/:id' => 'memos#destroy'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
+
 
 ```
 
